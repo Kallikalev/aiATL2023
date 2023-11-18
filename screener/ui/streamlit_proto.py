@@ -20,18 +20,21 @@ fake_summary = "Meet Chad Giga, the epitome of a Google Developer. Chad is a hig
 
 #Column Formatting
 col1, col2 = st.columns(2,gap="medium")
+submit_flag = False
 
 with col1:
     uploaded_resume = st.file_uploader('Choose your Resume file',type="pdf")
+    ## transform PDF to bytes or StringIO to send to DocumentAI
 
 with col2:
     ###Write error message if non-valid github format
-    git_user = st.text_input('Git Username','')
+    git_user = st.text_input('Git Username','',key='git')
     st.write('Repository url: ', "github.com/" + git_user)
 
     submit_btn = st.button("Submit Git")
     if submit_btn and git_user:
-        st.write('test successful')
+        st.write(':green[Submition Successful]')
+        submit_flag = True
     elif submit_btn and not git_user:
         st.write(':red[Enter Git Username to Continue]')
 
@@ -49,7 +52,7 @@ st.markdown("##")
     #string_data = stringio.read()
     #st.write(string_data)
 
-if submit_btn and git_user:
+if submit_flag:
     col3, col4 = st.columns(2)
     with col3:
         st.write("List of Skills found in resume")
@@ -76,8 +79,21 @@ if submit_btn and git_user:
     st.write(fake_summary)
 
     st.markdown("##")
+    
+    # git, git_btn, figure
+    
+    #store states
+    session = {}
+    for key in st.session_state:
+        session[key] = st.session_state[key]
+    st.write(session)
+
+    def update_state():
+        for key in session:
+            st.session_state[key] = session[key]
+
 
     ## Expander for Question-Answer BOT
     expander = st.expander("Click to ask questions about Resume and Github")
     with expander:
-        user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?")
+        user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?",on_change=update_state)
