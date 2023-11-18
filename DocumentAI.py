@@ -7,7 +7,7 @@ LOCATION = "us"  # Format is 'us' or 'eu'
 PROCESSOR_ID = "90d61cdc4cadeb91"  # Create processor in Cloud Console
 
 # The local file in your current working directory
-FILE_PATH = "JSandoval-Resume-10-18-23.pdf"
+FILE_PATH = "pdfs/JSandoval-Resume-10-28-23.pdf"
 # Refer to https://cloud.google.com/document-ai/docs/file-types
 # for supported file types
 MIME_TYPE = "application/pdf"   
