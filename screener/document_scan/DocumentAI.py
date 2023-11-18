@@ -3,14 +3,16 @@ from google.cloud import documentai
 import sys
 import os
 
-def scan_resume():
+
+def scan_resume(): #Function takes scan.pdf file from /test_resume and returns DocumentAI string of contents
     PROJECT_ID = "github-recruiter-405500"
-    LOCATION = "us_east1"  # Format is 'us' or 'eu'
+    LOCATION = "us"  # Format is 'us' or 'eu'
     PROCESSOR_ID = "90d61cdc4cadeb91"  # Create processor in Cloud Console
 
     # The local file in your current working directory
     cwd = os.getcwd()
-    FILE_PATH = f'{cwd}/document_scan/test_resume/JSandoval-Resume-10-18-23.pdf'
+    print({cwd})
+    FILE_PATH = f'{cwd}/screener/document_scan/test_resume/JSandoval-Resume-10-18-23.pdf'
     # Refer to https://cloud.google.com/document-ai/docs/file-types
     # for supported file types
     MIME_TYPE = "application/pdf"   
@@ -41,3 +43,7 @@ def scan_resume():
     document_object = result.document
     print("Document processing complete.")
     print(f"Text: {document_object.text}")
+    return document_object.text
+
+if __name__ == "__main__":
+    scan_resume()

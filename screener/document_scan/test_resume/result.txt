@@ -1,0 +1,66 @@
+JOSUE SANDOVAL RODRIGUEZ
+407 Roberts St. Dalton GA • linkedin.com/in/josues028/⚫ github.com/HouseJoJo ⚫ josuesandoval02@gmail.com • 762-201-8204
+EDUCATION
+Kennesaw State University
+Spring 2025
+Bachelor of Computer Science, Minor in Math
+Concentration: Artificial Intelligence
+Current GPA: 4.0
+Dalton Sate College
+Spring 2023
+Associates of General Studies (Computer Science Pathway)
+Overall GPA: 4.0
+EXPERIENCE
+Mohawk Industries - Data Analysis Intern; Calhoun, GA
+Aug. 2023 Current
+Spearheading the process of automating and visualizing financial reports for various hardwood product managers.
+• Leveraging Power BI to replace existing financial reports and provide current real time data to be used in quick business decisions.
+•
+•
+Mohawk Home - EDI Intern (Global IT); Sugar Valley, GA
+May 2023-Aug. 2023
+Developed proficiency in IBM RPG programming language, gaining valuable skills in legacy software navigation, strict column-
+based programming, and software development lifecycle for the AS/400
+• Successfully designed, programmed, documented, and pushed programs to production. Including a display program for efficient
+pallet value identification, and report program for warehouse inventory cost calculation
+• Demonstrated adaptability and quick learning in IBM RPG and AS/400 environment
+• Conducted and presented research on non-server-based Al tools for internal implementation
+Dalton State College - Peer Educator/Tutor; Dalton, GA
+Aug. 2022 May 2023
+• Conducted seven weekly one-on-one STEM tutoring sessions, delivering personalized academic support to college students
+• Delivered walk-in tutoring for college courses including Calculus 3, Physics 1/2, and Programming 1/2
+KFC Head Cook; Dalton, GA
+Sept. 2020 May 2023
+• Demonstrated responsibility, ensuring the safe and efficient preparation of food in a fast-paced environment.
+PROJECTS
+RPGLE GitHub Scraping – Python script for gathering program data using GitHub Rest API
+Jun. 2023
+• RPGLE GitHub Scraping is a Python-based program that leverages GitHub Code Search REST API to gather data from 1000 RPGLE
+repositories - https://github.com/HouseJoJo/rpgle-github-scrape
+Revel Textbook Scraping - Python web scrape automation for offline textbook access
+Feb. 2023
+• Written in Python. This script uses Selenium and Pandas libraries for browser automation and data scraping textbook information
+from an online only Pearson textbook - https://github.com/HouseJoJo/revel-textbook-scraping
+Mar. 2023
+LU and Cholesky Decomposition Analysis - Classroom Project for Intro to Numerical Analysis
+• Gathered, analyzed, and reported over 3k data points representing error margins for matrix decomposition algorithms
+https://drive.google.com/drive/folders/1-UfsmCpxDVFpy08Sdml7ZscS9mXDv6qY?usp=drive_link
+GPT-3 Integrated General Discord Bot - Python Bot to provide ChatGPT like responses to Discord
+Dec. 2022
+• "DatBot GPT-2.0-GPT" Leverages the Python library Pycord and OpenAl's GPT-3 API to integrate a ChatGPT interface into the
+messaging service Discord - https://github.com/HouseJoJo/DatBot-2.0-GPT
+Aug. 2023
+HONORS, AWARDS, CLUBS
+KSU AI Club - Founding Member; Project Lead for "Ask Scrappy"
+HSF Scholar - (Hispanic Scholarship Fund) - Nationwide scholarship network - Accepted 10k applicants out of 100k
+Math and Science Learning Center Assistant of the Year – Internal recognition within DSC Peer Education team
+KFC Foundation Scholarship Recipient
+Jun. 2023
+May 2023
+Apr. 2023
+ADDITIONAL INFORMATION
+Programming Languages/Tools: Python, Java, JavaScript, CSS, HTML, IBM RPG, IBM RDI, AS/400, Git, VSCode, Unix Command Line,
+Mac OS, Windows, SQL Databases, Power BI, Power Query
+Languages: Bilingual Fluency in Spanish
+Work Eligibility: Eligible to work in the U.S. with no restrictions
+1
