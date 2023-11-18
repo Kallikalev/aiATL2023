@@ -27,7 +27,7 @@ prompt = PromptTemplate(template=template, input_variables=["topic","question"])
 ## Sending prompt to LLM - via Chain, there are many flavors of Chains (Ex QA, Human/Ai prompt, many more....)
 # 
 topic = "Python"
-question = "What is the code for calculating Fibbonnaci numbers? What is it's time complexity"
+question = "What is the code for calculating Fibbonnaci numbers?"
 
 llm_chain = LLMChain(prompt=prompt,llm=llm)
 
