@@ -1,6 +1,7 @@
 from google.cloud import aiplatform
 from langchain.llms import VertexAI
-from langchain import PromptTemplate,LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
 ## DocumentLoaders and TextSplitters are not included here. These are super useful to process/chunk large inputs into prompts
 
 
@@ -16,7 +17,7 @@ Answer:
 """
 
 ##Setup a prompt
-prompt = PromptTemplate(template=template, input_variables=["topic"],["question"])
+prompt = PromptTemplate(template=template, input_variables=["topic","question"])
 
 ## Sending prompt to LLM - via Chain, there are many flavors of Chains (Ex QA, Human/Ai prompt, many more....)
 # 
