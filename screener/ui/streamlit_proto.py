@@ -18,82 +18,72 @@ skill_scores = list(model_skill_scores.values())
 fake_summary = "Meet Chad Giga, the epitome of a Google Developer. Chad is a highly skilled and experienced software engineer with a passion for innovation and a knack for solving complex problems. He possesses a deep understanding of computer science fundamentals and is proficient in a variety of programming languages and technologies. Chad is also an excellent communicator and collaborator, making him an invaluable asset to any team."
 ## End of Dummy Data
 
-#Column Formatting
-col1, col2 = st.columns(2,gap="medium")
-submit_flag = False
+# create form
+with st.form("master_form"):
+    #Column Formatting
+    col1, col2 = st.columns(2,gap="medium")
+    submit_flag = False
 
-with col1:
-    uploaded_resume = st.file_uploader('Choose your Resume file',type="pdf")
+    with col1:
+        uploaded_resume = st.file_uploader('Choose your Resume file',type="pdf")
     ## transform PDF to bytes or StringIO to send to DocumentAI
 
-with col2:
+    with col2:
     ###Write error message if non-valid github format
-    git_user = st.text_input('Git Username','',key='git')
-    st.write('Repository url: ', "github.com/" + git_user)
+        git_user = st.text_input('Git Username','',key='git')
+        st.write('Repository url: ', "github.com/" + git_user)
 
-    submit_btn = st.button("Submit Git")
-    if submit_btn and git_user:
-        st.write(':green[Submition Successful]')
-        submit_flag = True
-    elif submit_btn and not git_user:
-        st.write(':red[Enter Git Username to Continue]')
-
-st.markdown("##")
-# Send pdf info to Vertex AI here
-     #Convert to bytes or StringIO below
-    #bytes_data = uploaded_resume.getvalue()
-    #st.write(bytes_data)
-
-    # To convert to a string based IO:
-    #stringio = StringIO(uploaded_resume.getvalue().decode("utf-8"))
-    #st.write(stringio)
-
-    # To read file as string:
-    #string_data = stringio.read()
-    #st.write(string_data)
-
-if submit_flag:
-    col3, col4 = st.columns(2)
-    with col3:
-        st.write("List of Skills found in resume")
-        for skill in skills_ls:
-            st.markdown(f"- {skill}")
+        submit_btn = st.form_submit_button("Submit Git")
+        if submit_btn and git_user:
+            st.write(':green[Submition Successful]')
+            submit_flag = True
+        elif submit_btn and not git_user:
+            st.write(':red[Enter Git Username to Continue]')
 
     st.markdown("##")
+    # Send pdf info to Vertex AI here
+         #Convert to bytes or StringIO below
+        #bytes_data = uploaded_resume.getvalue()
+        #st.write(bytes_data)
 
-    with col4:
-        y_pos = np.arange(len(skills_ls))
-        fig, ax = plt.subplots(figsize=(5,5))
-        hbars = ax.barh(y_pos,skill_scores, align='center')
-        ax.set_yticks(y_pos, labels=skills_ls)
-        ax.invert_yaxis()  # labels read top-to-bottom
-        ax.set_xlabel('Score')
-        ax.set_title('Skill Scoreboard')
-        st.pyplot(fig)
+        # To convert to a string based IO:
+        #stringio = StringIO(uploaded_resume.getvalue().decode("utf-8"))
+        #st.write(stringio)
 
-    st.markdown("##")
+        # To read file as string:
+        #string_data = stringio.read()
+        #st.write(string_data)
 
-    ## Candidate Summary
-    st.write('Candidate Summary \n')
-    # Generated summary string passed below
-    st.write(fake_summary)
+    if submit_flag:
+        col3, col4 = st.columns(2)
+        with col3:
+            st.write("List of Skills found in resume")
+            for skill in skills_ls:
+                st.markdown(f"- {skill}")
 
-    st.markdown("##")
+        st.markdown("##")
+
+        with col4:
+            y_pos = np.arange(len(skills_ls))
+            fig, ax = plt.subplots(figsize=(5,5))
+            hbars = ax.barh(y_pos,skill_scores, align='center')
+            ax.set_yticks(y_pos, labels=skills_ls)
+            ax.invert_yaxis()  # labels read top-to-bottom
+            ax.set_xlabel('Score')
+            ax.set_title('Skill Scoreboard')
+            st.pyplot(fig)
+
+        st.markdown("##")
+
+        ## Candidate Summary
+        st.write('Candidate Summary \n')
+        # Generated summary string passed below
+        st.write(fake_summary)
+
+        st.markdown("##")
     
-    # git, git_btn, figure
-    
-    #store states
-    session = {}
-    for key in st.session_state:
-        session[key] = st.session_state[key]
-    st.write(session)
-
-    def update_state():
-        for key in session:
-            st.session_state[key] = session[key]
-
-
-    ## Expander for Question-Answer BOT
-    expander = st.expander("Click to ask questions about Resume and Github")
-    with expander:
-        user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?",on_change=update_state)
+        ## Expander for Question-Answer BOT
+        expander = st.expander("Click to ask questions about Resume and Github")
+        with expander:
+            user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?")
+        st.write('Mirror question test: ',user_prompt)
