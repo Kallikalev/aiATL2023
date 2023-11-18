@@ -3,7 +3,7 @@ from google.cloud import documentai
 
 
 PROJECT_ID = "github-recruiter-405500"
-LOCATION = "us_east1"  # Format is 'us' or 'eu'
+LOCATION = "us"  # Format is 'us' or 'eu'
 PROCESSOR_ID = "90d61cdc4cadeb91"  # Create processor in Cloud Console
 
 # The local file in your current working directory
