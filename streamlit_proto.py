@@ -77,6 +77,5 @@ if submit_btn and git_user:
     ## Expander for Question-Answer BOT
     expander = st.expander("Click to ask questions about Resume and Github")
     with expander:
-        st.write('blank')
-
+        user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?")
 
