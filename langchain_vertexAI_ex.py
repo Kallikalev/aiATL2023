@@ -1,7 +1,12 @@
 from google.cloud import aiplatform
+import google.auth
 from langchain.llms import VertexAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+
+# Enter your project_id
+creds, _ = google.auth.default(quota_project_id='git-code-scoring')
+
 ## DocumentLoaders and TextSplitters are not included here. These are super useful to process/chunk large inputs into prompts
 
 
