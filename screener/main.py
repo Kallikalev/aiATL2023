@@ -7,12 +7,11 @@
 #   Pass output from granular evaluations to higher level evaluation
 #
 # Imports
-#
-#
-
+#from ui.streamlit_proto.py import generate_ui
+from document_scan.DocumentAI.py import scan_resume
 
 def main():
-    
+    scan_resume
 
 if __name__ == "__main__":
     main()
