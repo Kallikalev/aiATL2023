@@ -4,7 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from PyPDF2 import PdfWriter
-from github_api import get_repos_from_username
+from pipeline import runPipeline
+
 #from screener.document_scan.DocumentAI.py import 
 #from screener.codey.evaluator.py import 
 
@@ -38,8 +39,7 @@ with st.form("master_form"):
 
         submit_btn = st.form_submit_button("Submit Git")
         if submit_btn and git_user:
-            data = get_repos_from_username(git_user)
-            print(data)
+            runPipeline(git_user, uploaded_resume)
             st.write(':green[Submition Successful]')
             submit_flag = True
         elif submit_btn and not git_user:
