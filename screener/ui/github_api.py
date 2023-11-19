@@ -1,4 +1,5 @@
 import requests
+import github_key
 
 base_url = "https://api.github.com/graphql"
 
@@ -7,7 +8,7 @@ allowedExtensions = [".py", ".cpp", ".rs"]
 headers = {
     "X-GitHub-Api-Version": "2022-11-28",
     "accept": "application/vnd.github+json",
-    "authorization": "token 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"
+    "authorization": "token " + github_key.key
 }
 
 request_body = """

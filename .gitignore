@@ -1,3 +1,4 @@
 pdfs/*
 json-key/*
 .venv
+screener/ui/github_key.py
