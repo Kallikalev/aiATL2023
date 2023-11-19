@@ -3,3 +3,5 @@ PyPDF2
 numpy
 matplotlib
 google-cloud-documentai
+pandas
+streamlit
