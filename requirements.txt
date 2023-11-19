@@ -1,0 +1,5 @@
+google-cloud-aiplatform
+PyPDF2
+numpy
+matplotlib
+google-cloud-documentai
