@@ -17,10 +17,17 @@ def rawToDesc(skills, rawFile, repoDesc, readMe): #skills string, rawFile string
 
     ReadMe: {readMe}
     
-    Action: Provide a one line description of this file and how it relates to the repo.
-    Provide and rank (from a scale of 1-10) 2 programming concepts that this file excels in. 
-    Provide and rank (from a scale of 1-10) 2 programming concepts that this file struggles with.
+    Structure your answer as follows:
 
+    ```json
+        {
+            "action": "Provide a one line description of this file and how it relates to the repository.",
+            "concept 1": "Provide and score (on a scale from 1 to 10) one programming concept that this file excels in."
+            "concept 2": "Provide and score (on a scale from 1 to 10) one programming concept that this file excels in."
+            "concept 3": "Provide and score (on a scale from 1 to 10 -- note that this is a negative signal) one programming concept that this file strugles in."
+            "concept 4": "Provide and score (on a scale from 1 to 10 -- note that this is a negative signal) one programming concept that this file struggles in."
+        }
+    ```
     Answer:
     """
 
