@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+from PyPDF2 import PdfWriter
 #from screener.document_scan.DocumentAI.py import 
 #from screener.codey.evaluator.py import 
 
@@ -26,8 +28,10 @@ with st.form("master_form"):
 
     with col1:
         uploaded_resume = st.file_uploader('Choose your Resume file',type="pdf")
-    ## transform PDF to bytes or StringIO to send to DocumentAI
-
+        ## transform PDF to bytes or StringIO to send to DocumentAI
+        file_path = f"{os.getcwd()}/document_scan/test_resume"
+        with open(file_path, 'wb') as output_pdf:
+            pdf_writer.write(output_pdf)
     with col2:
     ###Write error message if non-valid github format
         git_user = st.text_input('Git Username','',key='git')
