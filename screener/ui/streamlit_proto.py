@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from PyPDF2 import PdfWriter
+from github_api import get_repos_from_username
 #from screener.document_scan.DocumentAI.py import 
 #from screener.codey.evaluator.py import 
 
@@ -29,16 +30,16 @@ with st.form("master_form"):
     with col1:
         uploaded_resume = st.file_uploader('Choose your Resume file',type="pdf")
         ## transform PDF to bytes or StringIO to send to DocumentAI
-        file_path = f"{os.getcwd()}/document_scan/test_resume"
-        with open(file_path, 'wb') as output_pdf:
-            pdf_writer.write(output_pdf)
+
     with col2:
     ###Write error message if non-valid github format
         git_user = st.text_input('Git Username','',key='git')
-        st.write('Repository url: ', "github.com/" + git_user)
+        st.write('Account url: ', "github.com/" + git_user)
 
         submit_btn = st.form_submit_button("Submit Git")
         if submit_btn and git_user:
+            data = get_repos_from_username(git_user)
+            print(data)
             st.write(':green[Submition Successful]')
             submit_flag = True
         elif submit_btn and not git_user:
