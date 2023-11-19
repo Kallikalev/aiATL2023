@@ -13,19 +13,25 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chains import MapReduceDocumentsChain, ReduceDocumentsChain, StuffDocumentsChain
 from langchain.text_splitter import CharacterTextSplitter
+#from langchain.documentloaders
+from langchain.document_loaders import TextLoader
+
 ## DocumentLoaders and TextSplitters are not included here. These are super useful to process/chunk large inputs into prompts
 
 #Setup VertexAI model for langchain
 llm = VertexAI(model_name="code-bison",max_output_tokens=1000,temperature=0.3)
 
 # Map Step 1: file -> file description
-file_map_template 
+#file_map_template 
 #
 # Reduce Step 1: file descriptions -> repo description
 
 # Reduce Step 2: Repo descriptions -> candidate description
 
-def meta_eval(descriptions, skills):
+def meta_eval(file_descriptions, skills):
+    
+    # Assuming file_descriptions is a list[Str]
+    file_descriptions = '/n/n'.join(file_descriptions)
     # Map step: file descriptions -> repository description
     # This basically asks for all of the file descriptions at once -- prob inefficient
     # Need to specify delimiting character betweeen files and some format for name, language, etc. of a file
@@ -34,11 +40,11 @@ def meta_eval(descriptions, skills):
     Based on this list of reports, please summarize the quality of this repository and provide a detailed overview of the code.
     Think step by step. 
     ```
-    {descriptions}
+    {file_descriptions}
     ```
     Helpful Summary: """
     
-    map_prompt = PromptTemplate.from_template(map_template)
+    map_prompt = PromptTemplate.from_template(repo_map_template)
     map_chain = LLMChain(llm=llm,prompt=map_prompt)
 
     # Reduce step: repository descriptions -> Candidate evaluation
@@ -51,7 +57,7 @@ def meta_eval(descriptions, skills):
     At the end of your description of the candidate, give your definitive recommendation on whether this candidate deserves an interview. 
     """
 
-    reduce_prompt = PromptTemplate(template=reduce_template,input_variables=["descriptions","skills"])
+    reduce_prompt = PromptTemplate(template=reduce_template,input_variables=["file_descriptions","skills"])
     reduce_chain=LLMChain(llm=llm,prompt=reduce_prompt)
 
     combine_documents_chain = StuffDocumentsChain(
@@ -67,13 +73,15 @@ def meta_eval(descriptions, skills):
     map_reduce_chain = MapReduceDocumentsChain(
             llm_chain=map_chain,
             reduce_documents_chain=reduce_documents_chain,
-            document_variable_name="descriptions",
+            document_variable_name="file_descriptions",
             return_intermediate_steps=False
     )
+    loader = TextLoader(file_descriptions)
+    document = loader.load()
 
     # Running the MapReduce Chain
-    evaluation = map_reduce_chain.run(doc_captions)
-    return evaluation
+    final_evaluation = map_reduce_chain.run(document)
+    return final_evaluation #, intermediate_evaluation
 
 
 def granular_eval():
@@ -85,3 +93,6 @@ def get_skills():
     # Get list of skills from resume
     # Get from Christopher
     pass
+
+if __name__ == "__main__":
+    final_output, intermediate_output = meta_eval(file_descriptions="[sql,rust]",skills="")
