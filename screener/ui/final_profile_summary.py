@@ -15,12 +15,15 @@ def RepoSumToEval(RepositorySummaries, skillList): #skills string, rawFile strin
     
     RepositorySummaries = '\n\n'.join(RepositorySummaries)
 
-    template = """ You are a technical hiring manager trying to judge the capabilities of a candidate.
-    The following is a set of descriptions and judgments of various code rpeositories that the candidate has author
-    {repo_summaries}
-    Take these and organize these into a final, consolidated judgment of this candidate's stregths and weaknesses.
-    Compare theskills and weaknesses with the following list of skills from the candidate's resume.
-    At the end of your description of the candidate, give your definitive reccomendation.
+    template = """
+    You are an expert technical recruiter screening system. Your job is to use the summaries and evaluations of a list of repositories from a candidate's github to determine their strengths and weaknesses, and whether they are fit to be hired.
+
+    Below is a list of skills the candidate has listed on their resume and a list of summaries of candidate repositories, along with evaluations of their technical skills. Use this information to make a final, consolidated judgement of this candidate's experience, strengths, and weaknesses. At the end of your description of the candidate, give your definitive reccomendation.
+
+    <Repository Summaries>{repo_summaries}</Repository Summaries>
+
+    Provide your response below, with a maximum of three paragraphs. Be detailed but consise, provide constructive critisism where needed, do not be too harsh but do not be too generous, and provide unique, creative, and useful insight:
+    
     """
 
     llm = VertexAI(model_name="text-bison",max_output_tokens=500,temperature=0.3)
