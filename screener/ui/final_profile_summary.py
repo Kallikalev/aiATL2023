@@ -3,6 +3,7 @@ from langchain.llms import VertexAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.document_loaders import TextLoader
+import os
 
 #from git_output_sample_data.json_nico import test_dict
 
@@ -10,7 +11,7 @@ from langchain.document_loaders import TextLoader
 # List of skills
 # summarize all summaries
 
-def fileToRepoDesc(RepositorySummaries, skillList): #skills string, rawFile string, repoDesc string
+def RepoSumToEval(RepositorySummaries, skillList): #skills string, rawFile string, repoDesc string
     
     RepositorySummaries = '\n\n'.join(RepositorySummaries)
 
@@ -38,6 +39,6 @@ def fileToRepoDesc(RepositorySummaries, skillList): #skills string, rawFile stri
 
 if __name__ == "__main__":
     dummy_list = '[Relational Database Design, Data Modeling, SQL Programming, Data Integrity, Normalization, Natural Language Processing (NLP), Machine Learning, Artificial Intelligence (AI), Conversational AI, Chatbot Development, Command-Line Interface (CLI) Programming, User Experience Design, Software Development Methodologies, Task Automation, User Interaction]'
-    with open('/home/boon/GThack/chad_giga_repo.txt','r') as f:
+    with open(os.path.join(os.getcwd(),'chad_giga_repo.txt'),'r') as f:
         dummy_sum = f.read()
-    print(fileToRepoDesc(dummy_sum,dummy_list))
+    print(RepoSumToEval(dummy_sum,dummy_list))
