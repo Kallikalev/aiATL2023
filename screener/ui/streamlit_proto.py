@@ -74,9 +74,15 @@ with st.form("master_form"):
             hbars = ax.barh(y_pos,skill_scores, align='center')
             ax.set_yticks(y_pos, labels=skills_ls)
             ax.invert_yaxis()  # labels read top-to-bottom
-            ax.set_xlabel('Score')
-            ax.set_title('Skill Scoreboard')
+            #ax.set_xlabel('Score')
+            ax.set_title('Skill Scoreboard',fontsize=20)
+            # Label with specially formatted floats
+            ax.bar_label(hbars, fmt='%.1f',padding=5,fontsize=14)
+            ax.set_xlim(right=12)  # adjust xlim to fit labels
+            ax.set_xticks([])
+            plt.yticks(fontsize = 15) 
             st.pyplot(fig)
+
 
         st.markdown("##")
 
