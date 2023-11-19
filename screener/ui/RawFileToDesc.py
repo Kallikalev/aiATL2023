@@ -13,7 +13,7 @@ def rawToDesc(skills, rawFile, repoName, readMe): #skills string, rawFile string
 
     Raw File: {rawFile}
 
-    Repo Name: {repoName}
+    Repository Name: {repoName}
 
     ReadMe: {readMe}
     
@@ -40,5 +40,4 @@ def rawToDesc(skills, rawFile, repoName, readMe): #skills string, rawFile string
     response = llm_chain.run({"skills":skills,"rawFile":rawFile,"repoName":repoName,"readMe":readMe})
     return response
 
-if __name__ == "__main__":
-    print(test_dict)
+
