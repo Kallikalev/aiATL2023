@@ -2,42 +2,51 @@ from google.cloud import aiplatform
 from langchain.llms import VertexAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-from git_output_sample_data.json_nico import test_dict
 
-def rawToDesc(skills, rawFile, repoName, readMe): #skills string, rawFile string, repoDesc string
-    template = """The following is a list of skills provided from this candidates resume.
-    An optional repo description from this users Github is provided.
-    The optional ReadMe is provided as well. Do not fill in any unprovided details.
+def rawToDesc(skills, repoName, readMe, fileName, rawFile): #skills string, rawFile string, repoDesc string
+    template = """
+        You are an expert technical recruiter screening system. Your job is to evaluate a file from the github of a candidate and determine their strengths and weaknesses based on this file.
 
-    Skills: {skills}
+        Below is a list of skills listed by an applicant on their resume, the name of one of their github repositories, the repository ReadMe (if it exists), and the full text of a file they wrote.
 
-    Raw File: {rawFile}
+        Summarize the file and how it relates to the repository as a whole. Evaluate the skills which are displayed in this file with a brief analysis of strengths and weaknesses, as well as a score of 1 to 10. If a skill is not shown in this file, do not list it.
 
-    Repository Name: {repoName}
+        Skills: {skills}
 
-    ReadMe: {readMe}
-    
-    Structure your answer as follows:
+        Repository name: {repoName}
 
-    ```json
-        {
-            "action": "Provide a one line description of this file and how it relates to the repository.",
-            "concept 1": "Provide and score (on a scale from 1 to 10) one programming concept that this file excels in."
-            "concept 2": "Provide and score (on a scale from 1 to 10) one programming concept that this file excels in."
-            "concept 3": "Provide and score (on a scale from 1 to 10 -- note that this is a negative signal) one programming concept that this file strugles in."
-            "concept 4": "Provide and score (on a scale from 1 to 10 -- note that this is a negative signal) one programming concept that this file struggles in."
-        }
-    ```
-    Answer:
+        ReadMe: {readMe}
+
+        File name: {fileName}
+
+        File Contents:
+
+        {rawFile}
+
+        Provide your response below, in the following format (Remember to be insightful, unique, and consise in your analysis, and if a skill is not shown in this file, DO NOT LIST IT). Limit to a maximum of 6 skills:
+
+        File summary: <summary>
+
+        Skill 1: <skill analysis>
+
+        Skill 2: <skill analysis>
+
+        Skill 3: <skill analysis>
+
+        Skill 4: <skill analysis>
+
+        ...
+
     """
 
     llm = VertexAI(model_name="code-bison",max_output_tokens=1000,temperature=0.3)
-    prompt = PromptTemplate(template=template, input_variables=["skills","rawFile","repoName","readMe"])
+    prompt = PromptTemplate(template=template, input_variables=["skills","repoName","readMe","fileName","rawFile"])
 
 
     llm_chain = LLMChain(prompt=prompt,llm=llm)
-
-    response = llm_chain.run({"skills":skills,"rawFile":rawFile,"repoName":repoName,"readMe":readMe})
+    if readMe is None:
+        readMe = "No ReadMe found"
+    response = llm_chain.run({"skills":skills,"repoName":repoName,"readMe":readMe,"fileName":fileName,"rawFile":rawFile})
     return response
 
 

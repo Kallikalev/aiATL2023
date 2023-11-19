@@ -3,7 +3,7 @@ import github_key
 
 base_url = "https://api.github.com/graphql"
 
-allowedExtensions = [".py", ".cpp", ".rs"]
+allowedExtensions = [".py", ".cpp", ".rs", ".js", ".scala", ".go", ".cs", ".java", ".php", ".c", ".pl", ".rb"]
 
 headers = {
     "X-GitHub-Api-Version": "2022-11-28",
@@ -102,6 +102,8 @@ def run_query(username):
     if response.status_code == 200:
         response_json = response.json()
         return response_json
+    else:
+        print(response.content)
 
 def extract_repositories(query_response):
     parsedRepositories = list()
@@ -118,12 +120,21 @@ def extract_repositories(query_response):
             "stars": repository["stargazerCount"],
             "readme": None
         }
+        
 
         treeEntries = repository["defaultBranchRef"]["target"]["history"]["edges"][0]["node"]["tree"]["entries"]
         for entry in treeEntries:
             recursive_extract_files(entry, newRepository)
 
+        # get 10 largest files whose lengths are shorter than max
+        newRepository["files"] = [f for f in newRepository["files"] if len(f["contents"]) < 6000]
+        newRepository["files"].sort(key=lambda x : len(x["contents"]), reverse=True)
+        newRepository["files"] = newRepository["files"][:10]
+
         parsedRepositories.append(newRepository)
+
+    parsedRepositories = [r for r in parsedRepositories if len(r["files"]) > 0]
+    parsedRepositories = parsedRepositories[:5]
     return parsedRepositories
 
 def recursive_extract_files(entry, repository):
