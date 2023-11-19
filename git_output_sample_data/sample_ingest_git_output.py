@@ -25,4 +25,5 @@ output = {"repo":{"file_name":file_name,
 
         
 with open('git_output_test.json','w') as f:
-    json.dump(output,f)
+    test = json.dump(output,f)
+    print(test)

@@ -2,6 +2,7 @@ from google.cloud import aiplatform
 from langchain.llms import VertexAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+from git_output_sample_data.json_nico import test_dict
 
 def rawToDesc(skills, rawFile, repoDesc, readMe): #skills string, rawFile string, repoDesc string
     template = """The following is a list of skills provided from this candidates resume.
@@ -33,4 +34,4 @@ def rawToDesc(skills, rawFile, repoDesc, readMe): #skills string, rawFile string
     return response
 
 if __name__ == "__main__":
-    print(rawToDesc("test","test","test","test"))
+    print(test_dict)
