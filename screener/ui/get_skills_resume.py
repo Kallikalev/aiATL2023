@@ -10,8 +10,11 @@ import langchain
 
 template = """
 You are an technical recruiter screening candidate resumes.
-Identify the candidates skills specific to programming and software development, and output in a array list format. 
-Example Output: ['skill 1','skill 2', 'skill 3']
+Identify the candidates skills specific to programming and software development, and output in a array list format. Limit skills to programming languages, frameworks, and programming concepts.
+
+Format your output according to the following structure:
+
+['skill 1','skill 2', 'skill 3', ...]
 
 Resume: {resume}
 """

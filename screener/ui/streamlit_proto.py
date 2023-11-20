@@ -10,17 +10,12 @@ from pipeline import runPipeline
 #from screener.codey.evaluator.py import 
 
 ## Dummy Data
-model_skill_scores = {"C++":9.5,
-"React":9.0,
-"Python":9.5,
-"Java":3.0,
-"JavaScript":5.0,
-"Django":1.0}
 
-skills_ls = list(model_skill_scores.keys())
-skill_scores = list(model_skill_scores.values())
 fake_summary = "Meet Chad Giga, the epitome of a Google Developer. Chad is a highly skilled and experienced software engineer with a passion for innovation and a knack for solving complex problems. He possesses a deep understanding of computer science fundamentals and is proficient in a variety of programming languages and technologies. Chad is also an excellent communicator and collaborator, making him an invaluable asset to any team."
 ## End of Dummy Data
+
+candidate_evaluation = "No candidate summary could be generated."
+candidate_scores = dict()
 
 # create form
 with st.form("master_form"):
@@ -39,27 +34,17 @@ with st.form("master_form"):
 
         submit_btn = st.form_submit_button("Submit Git")
         if submit_btn and git_user:
-            runPipeline(git_user, uploaded_resume)
-            st.write(':green[Submition Successful]')
+            candidate_evaluation, candidate_scores = runPipeline(git_user, uploaded_resume)
+            st.write(':green[Submission Successful]')
             submit_flag = True
         elif submit_btn and not git_user:
             st.write(':red[Enter Git Username to Continue]')
 
     st.markdown("##")
-    # Send pdf info to Vertex AI here
-         #Convert to bytes or StringIO below
-        #bytes_data = uploaded_resume.getvalue()
-        #st.write(bytes_data)
-
-        # To convert to a string based IO:
-        #stringio = StringIO(uploaded_resume.getvalue().decode("utf-8"))
-        #st.write(stringio)
-
-        # To read file as string:
-        #string_data = stringio.read()
-        #st.write(string_data)
 
     if submit_flag:
+        skills_ls = list(candidate_scores.keys())
+        skill_scores = list(candidate_scores.values())
         col3, col4 = st.columns(2)
         with col3:
             st.write("List of Skills found in resume")
@@ -89,7 +74,7 @@ with st.form("master_form"):
         ## Candidate Summary
         st.write('Candidate Summary \n')
         # Generated summary string passed below
-        st.write(fake_summary)
+        st.write(candidate_evaluation)
 
         st.markdown("##")
     
@@ -97,4 +82,3 @@ with st.form("master_form"):
         expander = st.expander("Click to ask questions about Resume and Github")
         with expander:
             user_prompt = st.text_area("",placeholder="Ex. Does the candidate have experience in datacleaning?")
-        st.write('Mirror question test: ',user_prompt)

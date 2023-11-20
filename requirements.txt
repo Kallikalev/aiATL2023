@@ -7,3 +7,4 @@ pandas
 streamlit
 requests
 langchain
+json

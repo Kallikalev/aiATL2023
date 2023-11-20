@@ -11,7 +11,7 @@ import os
 # List of skills
 # summarize all summaries
 
-def RepoSumToEval(RepositorySummaries, skillList): #skills string, rawFile string, repoDesc string
+def RepoSumToEval(RepositorySummaries, skills): #skills string, rawFile string, repoDesc string
     
     RepositorySummaries = '\n\n'.join(RepositorySummaries)
 
@@ -20,14 +20,16 @@ def RepoSumToEval(RepositorySummaries, skillList): #skills string, rawFile strin
 
     Below is a list of skills the candidate has listed on their resume and a list of summaries of candidate repositories, along with evaluations of their technical skills. Use this information to make a final, consolidated judgement of this candidate's experience, strengths, and weaknesses. At the end of your description of the candidate, give your definitive reccomendation.
 
+    <Skills>{skills}</Skills>
+
     <Repository Summaries>{repo_summaries}</Repository Summaries>
 
-    Provide your response below, with a maximum of three paragraphs. Be detailed but consise, provide constructive critisism where needed, do not be too harsh but do not be too generous, and provide unique, creative, and useful insight:
+    Provide your response below in bullet-point format, with a maximum of three paragraphs. Be detailed but consise, provide constructive critisism where needed, do not be too harsh but do not be too generous, and provide unique, creative, and useful insight:
     
     """
 
     llm = VertexAI(model_name="text-bison",max_output_tokens=500,temperature=0.3)
-    prompt = PromptTemplate(template=template, input_variables=["repo_summaries","skill_list"])
+    prompt = PromptTemplate(template=template, input_variables=["repo_summaries","skills"])
 
 
     llm_chain = LLMChain(prompt=prompt,llm=llm)
@@ -37,7 +39,7 @@ def RepoSumToEval(RepositorySummaries, skillList): #skills string, rawFile strin
 
     #loader = TextLoader(RepositorySummaries)
 
-    response = llm_chain.run({"repo_summaries":RepositorySummaries,"skill_list":skillList})
+    response = llm_chain.run({"repo_summaries":RepositorySummaries,"skills":skills})
     return response
 
 if __name__ == "__main__":
